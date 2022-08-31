@@ -1,0 +1,12 @@
+<div class="step">
+  <app-transfer-amount-step (amountEntered)="amountEntered($event)"></app-transfer-amount-step>
+</div>
+<div class="step">
+  <app-transfer-destination-step (destinationEntered)="destinationEntered($event)"></app-transfer-destination-step>
+</div>
+<div class="step">
+  <app-transfer-offset-step (offsetEntered)="offsetEntered($event)"></app-transfer-offset-step>
+</div>
+<div class="step" *ngIf="finalStep == state?.value">
+  <app-transfer-final-step></app-transfer-final-step>
+</div>
