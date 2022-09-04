@@ -11,4 +11,4 @@
   <app-transfer-final-step></app-transfer-final-step>
 </div>
 
-<button type="button" (click)="transferConfirmed()">Confirm Transfer</button>
+<button type="button" (click)="transferConfirmed()" *ngIf="confirmActive()">Confirm Transfer</button>
