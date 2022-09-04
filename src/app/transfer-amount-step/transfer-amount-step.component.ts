@@ -1,4 +1,6 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {MoneyTransferStateChart} from "../money-transfer-statechart.service";
+import {MoneyTransferState} from "../money-transfer.machine";
 
 @Component({
   selector: 'app-transfer-amount-step',
@@ -9,8 +11,12 @@ export class TransferAmountStepComponent implements OnInit {
 
   @Output("amountEntered") amountEntered: EventEmitter<number> = new EventEmitter<number>()
   @ViewChild("amount") elAmountInput?: ElementRef;
+  active: boolean = false;
 
-  constructor() {
+  constructor(private transferMachine: MoneyTransferStateChart) {
+    transferMachine.stateTransition$.subscribe(state => {
+      this.active = state.matches(MoneyTransferState.TRANSFER_AMOUNT_STEP);
+    })
   }
 
   ngOnInit(): void {

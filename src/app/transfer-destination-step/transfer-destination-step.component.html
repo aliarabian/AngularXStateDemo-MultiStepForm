@@ -1,2 +1,4 @@
-<input #destination placeholder="Destination" type="text">
-<button type="button" name="next" (click)="nextStep()">Next</button>
+<ng-container *ngIf="active">
+  <input #destination placeholder="Destination" type="text">
+  <button type="button" name="next" (click)="nextStep()">Next</button>
+</ng-container>

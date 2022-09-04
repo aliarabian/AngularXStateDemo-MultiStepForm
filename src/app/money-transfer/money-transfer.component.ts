@@ -19,6 +19,7 @@ export class MoneyTransferComponent implements OnInit {
 
   constructor(private moneyTransferMachine: MoneyTransferStateChart) {
     moneyTransferMachine.stateTransition$.subscribe((state) => {
+        this.state = state;
         if (state?.matches(MoneyTransferState.TRANSFERRED)) {
           moneyTransferMachine.reset();
         }
@@ -31,18 +32,18 @@ export class MoneyTransferComponent implements OnInit {
   }
 
   amountEntered(amount: number) {
-    this.state = this.moneyTransferMachine.send({type: MoneyTransferEventTitle.AMOUNT_ENTERED, value: amount});
+    this.moneyTransferMachine.send({type: MoneyTransferEventTitle.AMOUNT_ENTERED, value: amount});
   }
 
   destinationEntered(destination: string) {
-    this.state = this.moneyTransferMachine.send({
+    this.moneyTransferMachine.send({
       type: MoneyTransferEventTitle.DESTINATION_ENTERED,
       value: destination
     });
   }
 
   offsetEntered(offset: string) {
-    this.state = this.moneyTransferMachine.send({type: MoneyTransferEventTitle.OFFSET_ENTERED, value: offset});
+    this.moneyTransferMachine.send({type: MoneyTransferEventTitle.OFFSET_ENTERED, value: offset});
   }
 
   isFinalState() {
@@ -51,5 +52,9 @@ export class MoneyTransferComponent implements OnInit {
 
   transferConfirmed() {
     this.moneyTransferMachine.send({type: MoneyTransferEventTitle.TRANSFER_CONFIRMED})
+  }
+
+  confirmActive(): boolean | undefined {
+    return this.state?.matches(MoneyTransferState.TRANSFER_CONFIRMATION)
   }
 }

@@ -1,2 +1,4 @@
-<input type="text" placeholder="Offset" #offset>
-<button type="button" name="next" (click)="nextStep()">Next</button>
+<ng-container *ngIf="active">
+  <input type="text" placeholder="Offset" #offset>
+  <button type="button" name="next" (click)="nextStep()">Next</button>
+</ng-container>

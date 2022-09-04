@@ -9,20 +9,16 @@ import {MoneyTransferStateChart} from "../money-transfer-statechart.service";
 })
 export class TransferFinalStepComponent implements OnInit {
   moneyTransferData?: MoneyTransferContext;
+  active: boolean = false;
 
   constructor(private moneyTransferStateMachine: MoneyTransferStateChart) {
+    moneyTransferStateMachine.stateTransition$.subscribe(state => {
+      this.active = state.matches(MoneyTransferState.TRANSFER_CONFIRMATION) || state.matches(MoneyTransferState.TRANSFERRED);
+      this.moneyTransferData = Object.assign({}, state.context);
+    })
   }
 
   ngOnInit(): void {
-    this.subscribe()
-  }
-
-  private subscribe() {
-    this.moneyTransferStateMachine.stateTransition$.subscribe(state => {
-      if (state.value == MoneyTransferState.TRANSFERRED) {
-        this.moneyTransferData = Object.assign({}, state.context);
-      }
-    })
   }
 
 
