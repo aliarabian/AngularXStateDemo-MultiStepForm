@@ -14,12 +14,16 @@ export class TransferFinalStepComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.subscribe()
+  }
+
+  private subscribe() {
     this.moneyTransferStateMachine.stateTransition$.subscribe(state => {
       if (state.value == MoneyTransferState.TRANSFERRED) {
-        this.moneyTransferData = state.context;
+        this.moneyTransferData = Object.assign({}, state.context);
       }
     })
-
   }
+
 
 }
