@@ -18,6 +18,8 @@ export class TransferOffsetStepComponent implements OnInit {
   }
 
   nextStep() {
-    this.offsetEntered.emit(this.offset?.nativeElement.value);
+    let value = this.offset?.nativeElement.value;
+    console.log(value)
+    this.offsetEntered.emit(value);
   }
 }
