@@ -1,7 +1,9 @@
+
 import {assign, createMachine, StateValue} from "xstate";
 import {MoneyTransferService} from "./money-transfer.service";
 import {InquiryService} from "./inquiry.service";
 import {map, take} from "rxjs/operators";
+
 
 export interface MoneyTransferContext {
   amount: number,
@@ -19,6 +21,7 @@ export enum MoneyTransferEventTitle {
   DESTINATION_VALIDATED = "DESTINATION_VALIDATED",
   TRANSFER_CONFIRMED = "TRANSFER_CONFIRMED",
   TRANSFER_COMPLETED = "TRANSFER_COMPLETED",
+
 }
 
 export enum MoneyTransferState {

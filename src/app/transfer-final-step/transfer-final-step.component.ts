@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MoneyTransferContext, MoneyTransferState} from "../money-transfer.machine";
 import {MoneyTransferStateChart} from "../money-transfer-statechart.service";
 
+
 @Component({
   selector: 'app-transfer-final-step',
   templateUrl: './transfer-final-step.component.html',
@@ -24,6 +25,4 @@ export class TransferFinalStepComponent implements OnInit {
       }
     })
   }
-
-
 }

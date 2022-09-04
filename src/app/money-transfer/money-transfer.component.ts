@@ -9,6 +9,7 @@ import {
 } from "../money-transfer.machine";
 import {MoneyTransferStateChart} from "../money-transfer-statechart.service";
 
+
 @Component({
   selector: 'app-money-transfer',
   templateUrl: './money-transfer.component.html',
@@ -51,5 +52,6 @@ export class MoneyTransferComponent implements OnInit {
 
   transferConfirmed() {
     this.moneyTransferMachine.send({type: MoneyTransferEventTitle.TRANSFER_CONFIRMED})
+
   }
 }
