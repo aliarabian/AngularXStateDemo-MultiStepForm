@@ -5,7 +5,7 @@ import {MoneyTransferStateChart} from "../money-transfer-statechart.service";
 @Component({
   selector: 'app-transfer-final-step',
   templateUrl: './transfer-final-step.component.html',
-  styleUrls: ['./transfer-final-step.component.css']
+  styleUrls: ['./transfer-final-step.component.scss']
 })
 export class TransferFinalStepComponent implements OnInit {
   moneyTransferData?: MoneyTransferContext;
@@ -13,7 +13,7 @@ export class TransferFinalStepComponent implements OnInit {
 
   constructor(private moneyTransferStateMachine: MoneyTransferStateChart) {
     moneyTransferStateMachine.stateTransition$.subscribe(state => {
-      this.active = state.matches(MoneyTransferState.TRANSFER_CONFIRMATION) || state.matches(MoneyTransferState.TRANSFERRED);
+      this.active = state.matches(MoneyTransferState.TRANSFER_STEP);
       this.moneyTransferData = Object.assign({}, state.context);
     })
   }

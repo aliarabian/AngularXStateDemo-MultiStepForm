@@ -1,17 +1,17 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {MoneyTransferStateChart} from "../money-transfer-statechart.service";
-import {MoneyTransferState} from "../money-transfer.machine";
+import {MoneyTransferEventTitle, MoneyTransferState} from "../money-transfer.machine";
 
 @Component({
   selector: 'app-transfer-destination-step',
   templateUrl: './transfer-destination-step.component.html',
-  styleUrls: ['./transfer-destination-step.component.css']
+  styleUrls: ['./transfer-destination-step.component.scss']
 })
 export class TransferDestinationStepComponent implements OnInit {
 
   @ViewChild("destination") destination?: ElementRef;
 
-  @Output("destinationEntered") destinationEntered: EventEmitter<string> = new EventEmitter<string>()
+  @Output("destinationEntered") destinationEntered: EventEmitter<string> = new EventEmitter<string>();
   active: boolean = false;
 
   constructor(private transferMachine: MoneyTransferStateChart) {
@@ -25,5 +25,9 @@ export class TransferDestinationStepComponent implements OnInit {
 
   nextStep() {
     this.destinationEntered.emit(this.destination?.nativeElement.value);
+  }
+
+  back() {
+    this.transferMachine.send({type: MoneyTransferEventTitle.BACK})
   }
 }

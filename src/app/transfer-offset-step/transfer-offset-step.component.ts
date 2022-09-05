@@ -5,7 +5,7 @@ import {MoneyTransferState} from "../money-transfer.machine";
 @Component({
   selector: 'app-transfer-offset-step',
   templateUrl: './transfer-offset-step.component.html',
-  styleUrls: ['./transfer-offset-step.component.css']
+  styleUrls: ['./transfer-offset-step.component.scss']
 })
 export class TransferOffsetStepComponent implements OnInit {
 

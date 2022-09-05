@@ -63,4 +63,8 @@ export class MoneyTransferStateChart {
     console.log(state)
 
   }
+
+  stop() {
+    this.service.stop();
+  }
 }

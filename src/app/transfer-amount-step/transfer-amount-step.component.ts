@@ -5,7 +5,7 @@ import {MoneyTransferState} from "../money-transfer.machine";
 @Component({
   selector: 'app-transfer-amount-step',
   templateUrl: './transfer-amount-step.component.html',
-  styleUrls: ['./transfer-amount-step.component.css']
+  styleUrls: ['./transfer-amount-step.component.scss']
 })
 export class TransferAmountStepComponent implements OnInit {
 

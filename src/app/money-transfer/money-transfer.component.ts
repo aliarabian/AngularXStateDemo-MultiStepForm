@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BaseActionObject, ResolveTypegenMeta, ServiceMap, State, TypegenDisabled} from "xstate";
 import {
   MoneyTransferContext,
@@ -12,19 +12,23 @@ import {MoneyTransferStateChart} from "../money-transfer-statechart.service";
 @Component({
   selector: 'app-money-transfer',
   templateUrl: './money-transfer.component.html',
-  styleUrls: ['./money-transfer.component.css']
+  styleUrls: ['./money-transfer.component.scss']
 })
-export class MoneyTransferComponent implements OnInit {
+export class MoneyTransferComponent implements OnInit, OnDestroy {
   state?: State<MoneyTransferContext, MoneyTransferEvent, MoneyTransferStateSchema, any, ResolveTypegenMeta<TypegenDisabled, MoneyTransferEvent, BaseActionObject, ServiceMap>>;
 
   constructor(private moneyTransferMachine: MoneyTransferStateChart) {
     moneyTransferMachine.stateTransition$.subscribe((state) => {
         this.state = state;
-        if (state?.matches(MoneyTransferState.TRANSFERRED)) {
+        if (state?.matches(`${MoneyTransferState.TRANSFER_STEP}.${MoneyTransferState.TRANSFERRED}`)) {
           moneyTransferMachine.reset();
         }
       }
     )
+  }
+
+  ngOnDestroy(): void {
+    this.moneyTransferMachine.stop();
   }
 
   ngOnInit(): void {
@@ -55,6 +59,6 @@ export class MoneyTransferComponent implements OnInit {
   }
 
   confirmActive(): boolean | undefined {
-    return this.state?.matches(MoneyTransferState.TRANSFER_CONFIRMATION)
+    return this.state?.matches(`${MoneyTransferState.TRANSFER_STEP}.${MoneyTransferState.TRANSFER_CONFIRMATION}`)
   }
 }
