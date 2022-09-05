@@ -12,10 +12,12 @@ export class TransferAmountStepComponent implements OnInit {
   @Output("amountEntered") amountEntered: EventEmitter<number> = new EventEmitter<number>()
   @ViewChild("amount") elAmountInput?: ElementRef;
   active: boolean = false;
+  amountVal: any;
 
   constructor(private transferMachine: MoneyTransferStateChart) {
     transferMachine.stateTransition$.subscribe(state => {
       this.active = state.matches(MoneyTransferState.TRANSFER_AMOUNT_STEP);
+      this.amountVal = state.context.amount;
     })
   }
 

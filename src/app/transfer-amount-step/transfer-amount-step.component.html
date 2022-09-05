@@ -1,4 +1,4 @@
 <ng-container *ngIf="active">
-  <input #amount placeholder="Amount" type="number">
+  <input #amount placeholder="Amount" type="number" [(ngModel)]="amountVal">
   <button type="button" name="next" (click)="nextStep()">Next</button>
 </ng-container>

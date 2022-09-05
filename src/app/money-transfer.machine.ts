@@ -169,6 +169,9 @@ export const createMoneyTransferMachine = (moneyTransfer: MoneyTransferService, 
           },
         },
         on: {
+          [MoneyTransferEventTitle.BACK]: {
+            target: MoneyTransferState.TRANSFER_AMOUNT_STEP
+          },
           [MoneyTransferEventTitle.DESTINATION_ENTERED]: {
             actions: assign({
               dest: (_, event: MoneyTransferDestinationEntered) => event.value
@@ -180,6 +183,9 @@ export const createMoneyTransferMachine = (moneyTransfer: MoneyTransferService, 
       },
       [MoneyTransferState.TRANSFER_OFFSET_STEP]: {
         on: {
+          [MoneyTransferEventTitle.BACK]: {
+            target: MoneyTransferState.TRANSFER_DESTINATION_STEP
+          },
           [MoneyTransferEventTitle.OFFSET_ENTERED]: [
             {
               actions: assign({
@@ -218,14 +224,23 @@ export const createMoneyTransferMachine = (moneyTransfer: MoneyTransferService, 
               }
             },
             on: {
+              [MoneyTransferEventTitle.BACK]: undefined,
               [MoneyTransferEventTitle.TRANSFER_COMPLETED]: {
                 target: MoneyTransferState.TRANSFERRED
               }
             }
           },
-          [MoneyTransferState.TRANSFERRED]: {},
-          [MoneyTransferState.TRANSFER_FAILURE]: {}
-          ,
+          [MoneyTransferState.TRANSFERRED]: {
+            type: "final"
+          },
+          [MoneyTransferState.TRANSFER_FAILURE]: {
+            type: "final"
+          }
+        },
+        on: {
+          [MoneyTransferEventTitle.BACK]: {
+            target: MoneyTransferState.TRANSFER_OFFSET_STEP
+          },
         }
       }
     },

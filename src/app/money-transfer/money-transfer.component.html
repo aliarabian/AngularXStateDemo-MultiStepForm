@@ -7,8 +7,9 @@
 <div class="step">
   <app-transfer-offset-step (offsetEntered)="offsetEntered($event)"></app-transfer-offset-step>
 </div>
-<div class="step" >
+<div class="step">
   <app-transfer-final-step></app-transfer-final-step>
 </div>
 
 <button type="button" (click)="transferConfirmed()" *ngIf="confirmActive()">Confirm Transfer</button>
+<button type="button" (click)="back()" *ngIf="confirmActive()">Back</button>

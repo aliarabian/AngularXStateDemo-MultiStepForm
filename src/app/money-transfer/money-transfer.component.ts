@@ -61,4 +61,8 @@ export class MoneyTransferComponent implements OnInit, OnDestroy {
   confirmActive(): boolean | undefined {
     return this.state?.matches(`${MoneyTransferState.TRANSFER_STEP}.${MoneyTransferState.TRANSFER_CONFIRMATION}`)
   }
+
+  back() {
+    this.moneyTransferMachine.send({type: MoneyTransferEventTitle.BACK})
+  }
 }

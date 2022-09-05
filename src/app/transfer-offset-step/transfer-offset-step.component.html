@@ -1,4 +1,5 @@
 <ng-container *ngIf="active">
-  <input type="text" placeholder="Offset" #offset>
+  <input type="text" placeholder="Offset" #offset [(ngModel)]="offsetValue">
   <button type="button" name="next" (click)="nextStep()">Next</button>
+  <button type="button" name="back" (click)="back()">Back</button>
 </ng-container>

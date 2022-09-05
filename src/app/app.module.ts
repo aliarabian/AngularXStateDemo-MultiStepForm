@@ -7,6 +7,7 @@ import { TransferDestinationStepComponent } from './transfer-destination-step/tr
 import { TransferOffsetStepComponent } from './transfer-offset-step/transfer-offset-step.component';
 import { TransferFinalStepComponent } from './transfer-final-step/transfer-final-step.component';
 import { MoneyTransferComponent } from './money-transfer/money-transfer.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -17,9 +18,10 @@ import { MoneyTransferComponent } from './money-transfer/money-transfer.componen
     TransferFinalStepComponent,
     MoneyTransferComponent
   ],
-  imports: [
-    BrowserModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

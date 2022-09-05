@@ -1,5 +1,5 @@
 <ng-container *ngIf="active">
-  <input #destination placeholder="Destination" type="text">
+  <input #destination placeholder="Destination" type="text" [(ngModel)]="dest">
   <button type="button" name="next" (click)="nextStep()">Next</button>
   <button type="button" name="back" (click)="back()">Back</button>
 </ng-container>
